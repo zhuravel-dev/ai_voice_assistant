@@ -1,6 +1,9 @@
 import 'package:ai_voice_assistant/domain/webrtc/webrtc_repository.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
+import 'package:ai_voice_assistant/domain/webrtc/webrtc_repository.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
+
 class WebRTCRepositoryImpl implements WebRTCRepository {
   RTCPeerConnection? _peerConnection;
   MediaStream? _localStream;
@@ -13,12 +16,15 @@ class WebRTCRepositoryImpl implements WebRTCRepository {
     });
 
     _peerConnection = await createPeerConnection({
+      'sdpSemantics': 'unified-plan',
       'iceServers': [
         {'urls': 'stun:stun.l.google.com:19302'},
       ],
     });
 
-    _peerConnection!.addStream(_localStream!);
+    for (final track in _localStream!.getTracks()) {
+      await _peerConnection!.addTrack(track, _localStream!);
+    }
   }
 
   void setOnIceCandidate(Function(RTCIceCandidate) onCandidate) {
@@ -44,6 +50,7 @@ class WebRTCRepositoryImpl implements WebRTCRepository {
 
   @override
   void dispose() {
+    _localStream?.getTracks().forEach((t) => t.stop());
     _localStream?.dispose();
     _peerConnection?.close();
   }
