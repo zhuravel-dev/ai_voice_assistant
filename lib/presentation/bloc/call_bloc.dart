@@ -12,55 +12,49 @@ class CallBloc extends Bloc<CallEvent, CallState> {
 
   StreamSubscription? _signalingSubscription;
 
-  CallBloc({
-    required this.signalingRepository,
-    required this.webRTCRepository,
-  }) : super(CallInitial()) {
+  CallBloc({required this.signalingRepository, required this.webRTCRepository})
+    : super(CallInitial()) {
     on<StartCall>(_onStartCall);
     on<SignalingMessageReceived>(_onSignalingMessage);
 
-    _signalingSubscription =
-        signalingRepository.messages.listen((message) {
-          add(SignalingMessageReceived(message));
-        });
+    _signalingSubscription = signalingRepository.messages.listen((message) {
+      add(SignalingMessageReceived(message));
+    });
   }
 
-  Future<void> _onStartCall(
-      StartCall event, Emitter<CallState> emit) async {
+  Future<void> _onStartCall(StartCall event, Emitter<CallState> emit) async {
     try {
       emit(CallConnecting());
 
       await webRTCRepository.init();
 
       if (webRTCRepository is dynamic) {
-        (webRTCRepository as dynamic).setOnIceCandidate(
-              (RTCIceCandidate candidate) {
-            signalingRepository.sendMessage({
-              'type': 'ice-candidate',
-              'candidate': {
-                'candidate': candidate.candidate,
-                'sdpMid': candidate.sdpMid,
-                'sdpMLineIndex': candidate.sdpMLineIndex,
-              }
-            });
-          },
-        );
+        (webRTCRepository as dynamic).setOnIceCandidate((
+          RTCIceCandidate candidate,
+        ) {
+          signalingRepository.sendMessage({
+            'type': 'ice-candidate',
+            'candidate': {
+              'candidate': candidate.candidate,
+              'sdpMid': candidate.sdpMid,
+              'sdpMLineIndex': candidate.sdpMLineIndex,
+            },
+          });
+        });
       }
 
       final offer = await webRTCRepository.createOffer();
 
-      signalingRepository.sendMessage({
-        'type': 'offer',
-        'sdp': offer.sdp,
-      });
+      signalingRepository.sendMessage({'type': 'offer', 'sdp': offer.sdp});
     } catch (e) {
       emit(CallError(e.toString()));
     }
   }
 
   Future<void> _onSignalingMessage(
-      SignalingMessageReceived event,
-      Emitter<CallState> emit) async {
+    SignalingMessageReceived event,
+    Emitter<CallState> emit,
+  ) async {
     final msg = event.message;
 
     switch (msg['type']) {

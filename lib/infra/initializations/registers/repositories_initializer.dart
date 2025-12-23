@@ -7,7 +7,6 @@ import 'package:ai_voice_assistant/domain/webrtc/webrtc_repository.dart';
 
 abstract class RepositoriesInitializer {
   static void initialize({bool useFake = true}) {
-
     if (useFake) {
       GetIt.I.registerSingleton<SignalingRepository>(
         FakeSignalingRepositoryImpl(),
@@ -18,9 +17,6 @@ abstract class RepositoriesInitializer {
       );
     }
 
-    GetIt.I.registerSingleton<WebRTCRepository>(
-      WebRTCRepositoryImpl(),
-    );
+    GetIt.I.registerSingleton<WebRTCRepository>(WebRTCRepositoryImpl());
   }
 }
-
