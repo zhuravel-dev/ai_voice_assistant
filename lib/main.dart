@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
-import 'presentation/speech_screen.dart';
+import 'infra/initializations/initializer.dart';
+import 'infra/initializations/registers/providers_initializer.dart';
+import 'app.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  await Initializer.initializeConfigurations();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Voice Assistant Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: SpeechScreen(),
-    );
-  }
+  final blocProviders = await ProvidersInitializer.initialize();
+
+  runApp(App(blocProviders: blocProviders));
 }
