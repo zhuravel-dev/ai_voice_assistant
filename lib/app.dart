@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'presentation/views/call_screen.dart';
+import 'presentation/views/main_screen.dart';
 
 class App extends StatelessWidget {
   final List<BlocProvider> blocProviders;
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: CallScreen(),
+        home: MainScreen(),
       ),
     );
   }
