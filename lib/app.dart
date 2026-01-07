@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'presentation/views/main_screen.dart';
+import 'presentation/views/screens/main_screen.dart';
 
 class App extends StatelessWidget {
   final List<BlocProvider> blocProviders;
