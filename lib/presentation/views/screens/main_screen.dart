@@ -27,17 +27,25 @@ class MainScreen extends StatelessWidget {
                     itemCount: textMessages.length,
                     itemBuilder: (context, index) {
                       final textMessage = textMessages[index];
+                      final isUser = textMessage.isUserMessage;
                       return Align(
-                        alignment: Alignment.centerRight,
+                        alignment: isUser
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
                         child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 4),
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: Colors.blueAccent,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                            margin: const EdgeInsets.symmetric(vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isUser
+                                  ? Colors.blueAccent
+                                  : Colors.amber[800],
+                              borderRadius: BorderRadius.circular(16),
+                            ),
                           child: Text(
-                            textMessage,
+                            textMessage.text,
                             style: const TextStyle(color: Colors.white, fontSize: 16),
                           ),
                         ),

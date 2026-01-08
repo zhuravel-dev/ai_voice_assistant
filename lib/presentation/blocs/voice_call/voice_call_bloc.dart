@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:ai_voice_assistant/domain/signaling/signaling_repository.dart';
-import 'package:ai_voice_assistant/domain/webrtc/webrtc_repository.dart';
+import 'package:ai_voice_assistant/domain/repositories/signaling/signaling_repository.dart';
+import 'package:ai_voice_assistant/domain/repositories/webrtc/webrtc_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'voice_call_event.dart';

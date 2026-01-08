@@ -1,5 +1,7 @@
+import 'package:ai_voice_assistant/domain/entities/text_message.dart';
+
 abstract class TextChatState {
-  final List<String> textMessages;
+  final List<TextMessage> textMessages;
   const TextChatState({this.textMessages = const []});
 }
 

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:ai_voice_assistant/domain/signaling/signaling_repository.dart';
+import 'package:ai_voice_assistant/domain/repositories/signaling/signaling_repository.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 class FakeSignalingRepositoryImpl implements SignalingRepository {

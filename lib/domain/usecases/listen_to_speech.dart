@@ -1,4 +1,4 @@
-import 'package:ai_voice_assistant/domain/speech/speech_repository.dart';
+import 'package:ai_voice_assistant/domain/repositories/speech/speech_repository.dart';
 
 class ListenToSpeech {
   final SpeechRepository repository;

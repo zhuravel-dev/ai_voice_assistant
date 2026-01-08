@@ -1,3 +1,5 @@
+import 'package:ai_voice_assistant/domain/entities/author_of_messages.dart';
+import 'package:ai_voice_assistant/domain/entities/text_message.dart';
 import 'package:ai_voice_assistant/presentation/blocs/text_chat/text_chat_bloc.dart';
 import 'package:ai_voice_assistant/presentation/blocs/text_chat/text_chat_event.dart';
 import 'package:ai_voice_assistant/presentation/blocs/voice_call/voice_call_bloc.dart';
@@ -60,7 +62,9 @@ class _BottomInputBarState extends State<BottomInputBar> {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
 
-    context.read<TextChatBloc>().add(SendTextMessage(text));
+    final message = TextMessage(text: text, author: AuthorOfMessage.user);
+
+    context.read<TextChatBloc>().add(SendTextMessage(message));
     _controller.clear();
   }
 
