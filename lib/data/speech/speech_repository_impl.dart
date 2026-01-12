@@ -1,4 +1,4 @@
-import 'package:ai_voice_assistant/domain/speech/speech_repository.dart';
+import 'package:ai_voice_assistant/domain/repositories/speech/speech_repository.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 class SpeechRepositoryImpl implements SpeechRepository {

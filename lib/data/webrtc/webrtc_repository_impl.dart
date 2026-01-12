@@ -1,4 +1,4 @@
-import 'package:ai_voice_assistant/domain/webrtc/webrtc_repository.dart';
+import 'package:ai_voice_assistant/domain/repositories/webrtc/webrtc_repository.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 class WebRTCRepositoryImpl implements WebRTCRepository {

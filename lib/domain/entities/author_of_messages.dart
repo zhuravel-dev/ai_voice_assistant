@@ -1,0 +1,1 @@
+enum AuthorOfMessage { user, donoAssistant }

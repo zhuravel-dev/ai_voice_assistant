@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'infra/initializations/initializer.dart';
-import 'infra/initializations/registers/providers_initializer.dart';
 import 'app.dart';
+import 'infrastructure/initializations/initializer.dart';
+import 'infrastructure/initializations/registers/providers_initializer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
